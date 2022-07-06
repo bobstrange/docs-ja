@@ -41,9 +41,9 @@ The `.once` modifier is also supported on component event listeners:
 ネイティブの DOM イベントと異なり、コンポーネントから発行されたイベントは、DOM ツリーを **浮上していきません**。直接の子コンポーネントから発行されるイベントのみを購読することができます。
 :::
 
-## Event Arguments
+## イベントの引数
 
-It's sometimes useful to emit a specific value with an event. For example, we may want the `<BlogPost>` component to be in charge of how much to enlarge the text by. In those cases, we can pass extra arguments to `$emit` to provide this value:
+特定の値とともにイベントを発行することが便利な場合があります。例えば、`<BlogPost>` にテキストをどれだけ拡大するかを担当させたい場合があるかもしれません。そのような場合、`$emit` に特別な引数を渡して、その値を指定することができます:
 
 ```vue-html
 <button @click="$emit('increaseBy', 1)">
@@ -51,19 +51,20 @@ It's sometimes useful to emit a specific value with an event. For example, we ma
 </button>
 ```
 
-Then, when we listen to the event in the parent, we can use an inline arrow function as the listener, which allows us to access the event argument:
+そして、親でそのイベントを購読する際に、リスナーとしてインラインのアロー関数を使うことで、イベントの引数にアクセスできるようになります:
 
 ```vue-html
 <MyButton @increase-by="(n) => count += n" />
 ```
 
 Or, if the event handler is a method:
+もしくは、イベントハンドラーがメソッドの場合は:
 
 ```vue-html
 <MyButton @increase-by="increaseCount" />
 ```
 
-Then the value will be passed as the first parameter of that method:
+そして、その値はメソッドの最初のパラメーターとして渡されます:
 
 <div class="options-api">
 
@@ -87,7 +88,7 @@ function increaseCount(n) {
 </div>
 
 :::tip
-All extra arguments passed to `$emit()` after the event name will be forwarded to the listener. For example, with `$emit('foo', 1, 2, 3)` the listener function will receive three arguments.
+`$emit()` に渡された引数の内、イベント名の後の引数は全てリスナーに転送されます。例えば `$emit('foo', 1, 2, 3)` とすると、リスナーの関数は 3 つの引数を受け取ります。
 :::
 
 ## Declaring Emitted Events
