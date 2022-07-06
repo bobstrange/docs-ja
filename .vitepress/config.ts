@@ -186,7 +186,7 @@ export const sidebar = {
           link: '/guide/components/registration'
         },
         { text: 'Props', link: '/guide/components/props' },
-        { text: 'Events', link: '/guide/components/events' },
+        { text: 'イベント', link: '/guide/components/events' },
         {
           text: 'Fallthrough Attributes',
           link: '/guide/components/attrs'
