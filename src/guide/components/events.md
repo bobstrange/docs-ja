@@ -1,14 +1,14 @@
-# Component Events
+# コンポーネントイベント
 
-> This page assumes you've already read the [Components Basics](/guide/essentials/component-basics). Read that first if you are new to components.
+> このページは、すでに[コンポーネントの基礎](/guide/essentials/component-basics)を読んでいることを前提にしています。初めてコンポーネントに触れる方は、まずそちらをお読みください。
 
 <div class="options-api">
   <VueSchoolLink href="https://vueschool.io/lessons/defining-custom-events-emits" title="Free Vue.js Lesson on Defining Custom Events"/>
 </div>
 
-## Emitting and Listening to Events
+## イベントの発行と購読
 
-A component can emit custom events directly in template expressions (e.g. in a `v-on` handler) using the built-in `$emit` function:
+コンポーネントは、組み込みの `$emit` 関数を使用して、テンプレート式内 (例: `v-on` ハンドラー内) で直接カスタムイベントを発行することができます:
 
 ```vue-html
 <!-- MyComponent -->
@@ -18,25 +18,27 @@ A component can emit custom events directly in template expressions (e.g. in a `
 <div class="options-api">
 
 The `$emit()` function is also available on the component instance as `this.$emit()`.
+`$emit()` 関数は、コンポーネントインスタンス上でも `this.$emit()` として利用できます。
 
 </div>
 
-The parent can then listen to it using `v-on`:
+親コンポーネントは `v-on` を使ってカスタムイベントを購読することができます:
 
 ```vue-html
 <MyComponent @some-event="callback" />
 ```
 
 The `.once` modifier is also supported on component event listeners:
+`.once` 修飾子は、コンポーネントのイベントリスナーでもサポートされています:
 
 ```vue-html
 <MyComponent @some-event.once="callback" />
 ```
 
-Like components and props, event names provide an automatic case transformation. Notice we emitted a camelCase event, but can listen for it using a kebab-cased listener in the parent. As with [props casing](/guide/components/props.html#prop-name-casing), we recommend using kebab-cased event listeners in templates.
+コンポーネントやプロパティのように、イベント名も自動的な大文字小文字の変換を提供します。子コンポーネントではキャメルケースのイベントを発行していますが、親コンポーネントではケバブケースのリスナーで購読できることに注目してください。[プロパティ名での大文字・小文字の使い分け](/guide/components/props.html#プロパティ名での大文字・小文字の使い分け) と同様に、テンプレート内ではケバブケースのイベントリスナーを使うことをお勧めします。
 
 :::tip
-Unlike native DOM events, component emitted events do **not** bubble. You can only listen to the events emitted by a direct child component.
+ネイティブの DOM イベントと異なり、コンポーネントから発行されたイベントは、DOM ツリーを **浮上していきません**。直接の子コンポーネントから発行されるイベントのみを購読することができます。
 :::
 
 ## Event Arguments
