@@ -91,9 +91,9 @@ function increaseCount(n) {
 `$emit()` に渡された引数の内、イベント名の後の引数は全てリスナーに転送されます。例えば `$emit('foo', 1, 2, 3)` とすると、リスナーの関数は 3 つの引数を受け取ります。
 :::
 
-## Declaring Emitted Events
+## イベント発行の宣言
 
-Emitted events can be explicitly declared on the component via the <span class="composition-api">[`defineEmits()`](/api/sfc-script-setup.html#defineprops-defineemits) macro</span><span class="options-api">[`emits`](/api/options-state.html#emits) option</span>.
+発行されるイベントは <span class="composition-api">[`defineEmits()`](/api/sfc-script-setup.html#defineprops-defineemits) マクロ</span><span class="options-api">[`emits`](/api/options-state.html#emits) オプション</span>によってコンポーネント上で明示的に宣言できます。
 
 <div class="composition-api">
 
@@ -103,9 +103,9 @@ const emit = defineEmits(['inFocus', 'submit'])
 </script>
 ```
 
-The returned `emit` function can be used to emit events in JavaScript.
+戻り値の `emit` 関数は、JavaScript でイベントを発行するために使用することができます。
 
-If not using `<script setup>`, events should be declared using the [`emits`](/api/options-state.html#emits) option, and the `emit` function is exposed on the `setup()` context:
+`<script setup>` を使用しない場合、イベントは [`emits`](/api/options-state.html#emits) オプションを使用して宣言する必要があり、 `emit` 関数は `setup()` コンテキストで公開されます:
 
 ```js
 export default {
@@ -127,7 +127,7 @@ export default {
 
 </div>
 
-The `emits` option also supports an object syntax, which allows us to perform runtime validation of the payload of the emitted events:
+`emits` オプションはオブジェクト構文もサポートしており、それによって発行されたイベントのペイロードについてランタイムのバリデーションを行うことができるようになります。
 
 <div class="composition-api">
 
@@ -135,14 +135,14 @@ The `emits` option also supports an object syntax, which allows us to perform ru
 <script setup>
 const emit = defineEmits({
   submit(payload) {
-    // return `true` or `false` to indicate
-    // validation pass / fail
+    // `true` か`false` を返すことで
+    // バリデーションが通ったか / 失敗したかを示せます
   }
 })
 </script>
 ```
 
-If you are using TypeScript with `<script setup>`, it's also possible to declare emitted events using pure type annotations:
+TypeScript で `<script setup>` を使う場合、型注釈によって発行されるイベントを宣言することができます:
 
 ```vue
 <script setup lang="ts">
@@ -153,7 +153,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-More details: [Typing Component Emits](/guide/typescript/composition-api.html#typing-component-emits) <sup class="vt-badge ts" />
+詳細: [コンポーネントの emit の型付け](/guide/typescript/composition-api.html#コンポーネントの-emit-の型付け) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
@@ -162,21 +162,21 @@ More details: [Typing Component Emits](/guide/typescript/composition-api.html#ty
 export default {
   emits: {
     submit(payload) {
-      // return `true` or `false` to indicate
-      // validation pass / fail
+    // `true` か`false` を返すことで
+    // バリデーションが通ったか / 失敗したかを示せます
     }
   }
 }
 ```
 
-See also: [Typing Component Emits](/guide/typescript/options-api.html#typing-component-emits) <sup class="vt-badge ts" />
+参考: [コンポーネントの emit の型付け](/guide/typescript/options-api.html#コンポーネントの-emit-の型付け) <sup class="vt-badge ts" />
 
 </div>
 
-Although optional, it is recommended to define all emitted events in order to better document how a component should work. It also allows Vue to exclude known listeners from [fallthrough attributes](/guide/components/attrs.html#v-on-listener-inheritance).
+任意ですが、コンポーネントがどのように動くかをより良く文書化するために、全ての発行されるイベントを定義することをお勧めします。また、そうすることで Vue は既知のリスナーを [フォールスルー属性](/guide/components/attrs.html#v-on-リスナーの継承) から除外することができます。
 
 :::tip
-If a native event (e.g., `click`) is defined in the `emits` option, the listener will now only listen to component-emitted `click` events and no longer respond to native `click` events.
+`emit` オプションでネイティブイベント (例: `click`) が定義されている場合、リスナーはコンポーネントが発行する `click` イベントのみを購読し、ネイティブの `click` イベントには応答しなくなります。
 :::
 
 ## Events Validation
